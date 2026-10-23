@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DISPOSABLECOMPUTE.COM — The Execution Substrate of the Agent Economy</title>
+<meta name="description" content="A living knowledge base of commercial disposable compute primitives: vendor comparison scorecard, pricing snapshots, and the feeds that keep it current.">
+<style>
+  :root{
+    --bg:#0a0b0e; --panel:#111318; --panel2:#161a21; --line:#232833;
+    --ink:#e8eaf0; --dim:#9aa3b2; --faint:#5c6575;
+    --amber:#e8b34b; --green:#58c98a; --red:#e56b6b; --blue:#6aa8ff; --violet:#b48cf2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace}
+  a{color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(232,179,75,.35)}
+  a:hover{color:#f5cf7e}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+  header.site{border-bottom:1px solid var(--line);padding:22px 0;position:sticky;top:0;background:rgba(10,11,14,.94);backdrop-filter:blur(8px);z-index:50}
+  .nav{display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:Consolas,Menlo,monospace;font-weight:700;letter-spacing:.14em;font-size:14px;color:var(--ink);border:none}
+  .brand span{color:var(--amber)}
+  nav.links a{border:none;color:var(--dim);font-size:13px;margin-left:22px;letter-spacing:.04em}
+  nav.links a:hover{color:var(--ink)}
+  .hero{padding:110px 0 70px}
+  .kicker{font-family:Consolas,Menlo,monospace;font-size:12px;letter-spacing:.28em;color:var(--amber);margin-bottom:26px}
+  h1{font-size:clamp(38px,6vw,68px);line-height:1.06;font-weight:800;letter-spacing:-.02em;max-width:16em}
+  h1 em{font-style:normal;color:var(--amber)}
+  .lede{margin-top:26px;font-size:18px;color:var(--dim);max-width:44em}
+  .lede strong{color:var(--ink);font-weight:600}
+  .rule{height:1px;background:var(--line);margin:56px 0}
+  section{padding:34px 0}
+  h2{font-size:26px;font-weight:750;letter-spacing:-.01em;margin-bottom:8px}
+  h2 .n{font-family:Consolas,Menlo,monospace;color:var(--faint);font-size:15px;font-weight:400;margin-right:12px}
+  .sub{color:var(--dim);font-size:15px;max-width:52em;margin-bottom:28px}
+  .thesis{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amber);padding:28px 32px;margin:8px 0 0}
+  .thesis p{color:var(--dim);font-size:16px}
+  .thesis p+p{margin-top:14px}
+  .thesis strong{color:var(--ink)}
+  .caveat{margin-top:22px;border:1px dashed #4a4433;background:#141209;padding:20px 24px;font-size:14px;color:#c9b98a}
+  .caveat strong{color:var(--amber)}
+  .matrix{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:8px}
+  .cat{background:var(--panel);border:1px solid var(--line);padding:24px 26px}
+  .cat h3{font-size:15px;font-weight:700;letter-spacing:.02em;margin-bottom:4px}
+  .cat h3 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:10px}
+  .cat .bench{font-family:Consolas,Menlo,monospace;font-size:12.5px;color:var(--dim);line-height:1.9;margin-top:12px}
+  .cat .bench b{color:var(--ink);font-weight:600}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);margin-top:10px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:1080px}
+  th{background:var(--panel2);text-align:left;padding:12px 14px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:#cdd3dd}
+  tr:last-child td{border-bottom:none}
+  td.v{font-weight:700;color:var(--ink);white-space:nowrap}
+  td .tag{display:inline-block;font-family:Consolas,Menlo,monospace;font-size:11px;padding:2px 8px;border:1px solid var(--line);border-radius:3px;color:var(--dim);margin:1px 2px 1px 0}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:8px}
+  .vcard{background:var(--panel);border:1px solid var(--line);padding:24px 26px;display:flex;flex-direction:column}
+  .vcard h3{font-size:17px;font-weight:750}
+  .vcard .prim{font-family:Consolas,Menlo,monospace;font-size:12px;color:var(--amber);letter-spacing:.06em;margin:6px 0 14px}
+  .vcard dl{display:grid;grid-template-columns:128px 1fr;gap:6px 12px;font-size:13px}
+  .vcard dt{color:var(--faint);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
+  .vcard dd{color:#cdd3dd}
+  .vcard .verdict{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:13.5px;color:var(--dim)}
+  .vcard .verdict strong{color:var(--ink)}
+  .insight{background:var(--panel2);border:1px solid var(--line);padding:26px 30px;margin-top:26px}
+  .insight h4{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;font-weight:700}
+  .insight p{color:var(--dim);font-size:15px}
+  .insight p+p{margin-top:10px}
+  .insight strong{color:var(--ink)}
+  .feeds{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:8px}
+  .feed{background:var(--panel);border:1px solid var(--line);padding:24px 26px}
+  .feed h3{font-size:15px;font-weight:700;margin-bottom:8px}
+  .feed p{font-size:13.5px;color:var(--dim)}
+  .feed .src{font-family:Consolas,Menlo,monospace;font-size:11.5px;color:var(--faint);margin-top:12px;display:block}
+  footer{border-top:1px solid var(--line);margin-top:70px;padding:36px 0 60px;color:var(--faint);font-size:13px}
+  footer .cols{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px}
+  .stamp{font-family:Consolas,Menlo,monospace;font-size:12px;color:var(--faint)}
+  @media(max-width:700px){nav.links{display:none}.hero{padding:70px 0 40px}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top">DISPOSABLE<span>COMPUTE</span>.COM</a>
+    <nav class="links">
+      <a href="#thesis">Thesis</a><a href="#matrix">Matrix</a><a href="#scorecard">Scorecard</a><a href="#pricing">Pricing</a><a href="#feeds">Feeds</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" id="top">
+
+<div class="hero">
+  <div class="kicker">A LIVING KNOWLEDGE BASE · VENDOR SCORECARD</div>
+  <h1>Disposable compute is the <em>execution substrate</em> of the agent economy.</h1>
+  <p class="lede">Agents that write and run code, browse the web, or operate tools need <strong>isolated sandboxes they can trust to be thrown away</strong> — a fresh microVM or container per task, so a mistake or a malicious prompt can't damage anything persistent. This site tracks, in one standardized evaluation matrix, which commercial providers actually deliver that primitive, and at what price.</p>
+</div>
+
+<div class="rule"></div>
+
+<section id="thesis">
+  <h2><span class="n">01</span>Thesis</h2>
+  <p class="sub">Why this category exists, and the one claim nobody in it can currently prove.</p>
+  <div class="thesis">
+    <p><strong>Two demand drivers compound.</strong> First, trust: every agent that touches the world does it through a sandbox, and the economic value isn't the compute — it's the <strong>disposal guarantee</strong>. Second, economics: agent code-execution is bursty by nature (thousands of short-lived environments), and GPU capacity is the most expensive thing to leave idle. Rent capacity for exactly as long as the job needs; destroy the rest.</p>
+    <p>The market is pricing it in now: sandbox vendors raised at infrastructure valuations through 2026, and every hyperscaler ships a disposable primitive — Lambda, Cloud Run, Spot VMs, Workers, Machines.</p>
+  </div>
+  <div class="caveat">
+    <strong>The disposal-attestation gap.</strong> The disposal guarantee is only as good as its enforcement — and today it is vendor-claimed, not verified. Nobody attests that the sandbox actually destroyed the state. <em>"This VM was thrown away" is an unverified assumption about the state of the system.</em> The vendor that closes this gap — attested teardown, invocation-bound proof that nothing persisted — owns the trust layer, not just the compute layer.
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="matrix">
+  <h2><span class="n">02</span>The Evaluation Matrix</h2>
+  <p class="sub">Five categories. Every vendor in the scorecard is tracked against this schema. Benchmarks are the industry's observed thresholds, not marketing claims.</p>
+  <div class="matrix">
+    <div class="cat">
+      <h3><span class="dot" style="background:var(--amber)"></span>Provisioning &amp; Elasticity</h3>
+      <div class="bench">
+        <b>Boot time:</b> &lt;10ms for Wasm/Isolates · &lt;150ms for Firecracker microVMs · &gt;10s for standard VMs<br>
+        <b>Concurrency:</b> maximum concurrent sandboxes per account/tier<br>
+        <b>Scale-to-zero:</b> supported, and what "zero" bills (disk only vs. nothing)
+      </div>
+    </div>
+    <div class="cat">
+      <h3><span class="dot" style="background:var(--green)"></span>Pricing Model</h3>
+      <div class="bench">
+        <b>Billing granularity:</b> per-millisecond vs. per-second — and <b>what the meter counts</b> (wall-clock vs. active CPU is the real divide)<br>
+        <b>CPU/memory bundling:</b> independent scaling vs. fixed ratios<br>
+        <b>GPU availability:</b> self-serve vs. enterprise-gated; per-second H100/B200 billing<br>
+        <b>Network egress markups</b>
+      </div>
+    </div>
+    <div class="cat">
+      <h3><span class="dot" style="background:var(--blue)"></span>Workload Fit</h3>
+      <div class="bench">
+        <b>Max execution duration:</b> 15 min AWS Lambda (standard) · 90 min Lambda Managed Instances (async) · 24h Cloud Run Jobs · no cap GCP Spot VMs<br>
+        <b>Stateful volume attachment:</b> speed and cost of persistent disks<br>
+        <b>GPU passthrough</b> inside the sandbox trust boundary
+      </div>
+    </div>
+    <div class="cat">
+      <h3><span class="dot" style="background:var(--violet)"></span>Isolation Architecture</h3>
+      <div class="bench">
+        <b>Underlying primitive:</b> Shared Kernel/Docker · gVisor · Firecracker/KVM · Kata Containers · V8 Isolates<br>
+        Ranked by boundary strength for <b>untrusted</b> code: microVM &gt; gVisor &gt; containers &gt; isolates (isolates win on speed, lose on kernel sharing)
+      </div>
+    </div>
+    <div class="cat">
+      <h3><span class="dot" style="background:var(--red)"></span>Governance &amp; Guardrails</h3>
+      <div class="bench">
+        <b>Network egress locking:</b> deterministic, default-deny outbound<br>
+        <b>Ephemeral identity injection:</b> OIDC / SPIFFE / short-lived IAM<br>
+        <b>TTL hard-kill switches:</b> automated, non-bypassable teardown<br>
+        <b>Disposal attestation:</b> <i>no vendor currently offers this — the gap</i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="scorecard">
+  <h2><span class="n">03</span>Vendor Scorecard</h2>
+  <p class="sub">Eight commercial offerings, scored against the matrix. Figures verified October 22, 2026. Vendor claims are marked as claims; independent measurements are marked as measured.</p>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr>
+      <th>Vendor</th><th>Primitive</th><th>Boot</th><th>Billing</th><th>Max duration</th><th>GPU</th><th>Concurrency</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="v">AWS Lambda</td>
+        <td>Firecracker microVM</td>
+        <td>~1.2–2.8s p95 cold (Node, measured)</td>
+        <td><span class="tag">per-ms</span> GB-sec · CPU ∝ memory (1 vCPU @ 1769MB)</td>
+        <td>15 min standard · <b>90 min</b> on Managed Instances (async)</td>
+        <td>None</td>
+        <td>1,000/account default</td>
+      </tr>
+      <tr>
+        <td class="v">GCP Spot VMs</td>
+        <td>Full VM (KVM)</td>
+        <td>&gt;10s (standard VM)</td>
+        <td><span class="tag">per-sec</span> up to 91% off on-demand</td>
+        <td>No cap (30s preemption notice)</td>
+        <td>Yes — H100 ~$3.30/hr spot</td>
+        <td>Quota-bound</td>
+      </tr>
+      <tr>
+        <td class="v">Fly.io Machines</td>
+        <td>Firecracker microVM</td>
+        <td>~300–600ms wake (measured)</td>
+        <td><span class="tag">per-sec</span> · stopped = disk only</td>
+        <td>Runs until stopped</td>
+        <td>On-demand NVIDIA</td>
+        <td>Org quota</td>
+      </tr>
+      <tr>
+        <td class="v">E2B</td>
+        <td>Firecracker microVM</td>
+        <td>~150ms (claimed)</td>
+        <td><span class="tag">per-sec</span> wall-clock · $0.0504/vCPU-hr</td>
+        <td>1h Hobby / 24h Pro</td>
+        <td>Enterprise only</td>
+        <td>20 Hobby / 100–1,100 Pro</td>
+      </tr>
+      <tr>
+        <td class="v">Modal</td>
+        <td>gVisor (VM in beta)</td>
+        <td>Sub-second (claimed)</td>
+        <td><span class="tag">per-sec</span> active · $0.1419/core-hr sandbox</td>
+        <td>5 min default → 24h max</td>
+        <td>Full self-serve: H100 $3.95/hr, B200 $6.25</td>
+        <td>High</td>
+      </tr>
+      <tr>
+        <td class="v">Cloudflare Workers</td>
+        <td>V8 isolates</td>
+        <td>&lt;5ms (measured)</td>
+        <td><span class="tag">CPU-time</span> active only · 128MB fixed</td>
+        <td>30s default / 5 min max CPU (Cron 15 min)</td>
+        <td>Workers AI (separate)</td>
+        <td>Effectively unlimited</td>
+      </tr>
+      <tr>
+        <td class="v">Daytona</td>
+        <td>Container (VM optional)</td>
+        <td>Sub-90ms (claimed)</td>
+        <td><span class="tag">per-sec</span> · $0.0504/vCPU-hr</td>
+        <td>Persistent; 15-min idle auto-stop default</td>
+        <td>Self-serve: H100 ~$2.27/hr live</td>
+        <td>High</td>
+      </tr>
+      <tr>
+        <td class="v">Vercel Sandbox</td>
+        <td>Firecracker microVM</td>
+        <td>0.67s median, 100-burst (measured)</td>
+        <td><span class="tag">per-ms</span> active CPU only · $0.128/vCPU-hr</td>
+        <td>45 min Hobby / 5h Pro</td>
+        <td>None</td>
+        <td>10 Hobby / 10,000 Pro</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="cards" style="margin-top:26px">
+
+    <div class="vcard">
+      <h3>AWS Lambda</h3><div class="prim">FIRECRACKER MICROVM · THE REFERENCE</div>
+      <dl>
+        <dt>Elasticity</dt><dd>1,000 concurrent/account default; 1,000 new environments per 10s per function. Scales to zero.</dd>
+        <dt>Pricing</dt><dd>$0.20/M requests + GB-seconds, per-ms. CPU locked to memory ratio — the classic bundling constraint.</dd>
+        <dt>Workload fit</dt><dd>15 min standard; <b>90 min on Lambda Managed Instances</b> (async/event-source, since Sep 2026). No GPU.</dd>
+        <dt>Isolation</dt><dd>Firecracker/KVM — the primitive the whole category copied.</dd>
+        <dt>Governance</dt><dd>IAM roles = ephemeral identity; VPC + resource policies for egress; timeout = TTL kill.</dd>
+      </dl>
+      <div class="verdict"><strong>Verdict:</strong> the incumbent reference. Managed Instances quietly retired the "15-minute" objection for async workloads.</div>
+    </div>
+
+    <div class="vcard">
+      <h3>GCP Spot VMs</h3><div class="prim">FULL KVM VM · THE BURSTY-GPU PLAY</div>
+      <dl>
+        <dt>Elasticity</dt><dd>Quota-bound; minutes to boot. No scale-to-zero — you manage the lifecycle.</dd>
+        <dt>Pricing</dt><dd>Per-second (1-min minimum), up to 91% off on-demand. H100 ≈ $3.30/hr on spot.</dd>
+        <dt>Workload fit</dt><dd>No runtime cap on Spot (legacy preemptible was 24h). 30-second preemption notice — checkpoint or die.</dd>
+        <dt>Isolation</dt><dd>Full KVM VM — strongest boundary, slowest boot.</dd>
+        <dt>Governance</dt><dd>Service accounts / OIDC; preemption is a hard kill but an <i>unverifiable</i> one.</dd>
+      </dl>
+      <div class="verdict"><strong>Verdict:</strong> cheapest bursty GPU on paper; the preemption model is disposal-by-force, not disposal-by-guarantee.</div>
+    </div>
+
+    <div class="vcard">
+      <h3>Fly.io Machines</h3><div class="prim">FIRECRACKER MICROVM · THE PRAGMATIST</div>
+      <dl>
+        <dt>Elasticity</dt><dd>~300–600ms wake; per-second billing; stopped machines bill disk only ($0.15/GB-mo).</dd>
+        <dt>Pricing</dt><dd>shared-cpu-1x/256MB ≈ $2.19/mo always-on. Egress $0.02/GB NA/EU, $0.12 Africa/India.</dd>
+        <dt>Workload fit</dt><dd>Runs until stopped. Fly Volumes for state. On-demand NVIDIA GPUs.</dd>
+        <dt>Isolation</dt><dd>Firecracker/KVM on bare metal.</dd>
+        <dt>Governance</dt><dd>Machine stop API as TTL; private WireGuard networking.</dd>
+      </dl>
+      <div class="verdict"><strong>Verdict:</strong> the cheapest honest microVM meter; you own the lifecycle, which is the price of the price.</div>
+    </div>
+
+    <div class="vcard">
+      <h3>E2B</h3><div class="prim">FIRECRACKER MICROVM · THE AGENT-NATIVE DEFAULT</div>
+      <dl>
+        <dt>Elasticity</dt><dd>~150ms claimed boot; 20 concurrent Hobby, 100–1,100 Pro. Scales to zero.</dd>
+        <dt>Pricing</dt><dd>$0.0504/vCPU-hr + $0.0162/GiB-hr, <b>per-second wall-clock</b> — the meter runs while your agent waits on the model.</dd>
+        <dt>Workload fit</dt><dd>1h Hobby / 24h Pro sessions. No self-serve GPU (enterprise only).</dd>
+        <dt>Isolation</dt><dd>Firecracker/KVM, open runtime (Apache-2.0) — self-hostable.</dd>
+        <dt>Governance</dt><dd>Session timeout = hard kill; isolated network default.</dd>
+      </dl>
+      <div class="verdict"><strong>Verdict:</strong> deepest isolation of the specialists; wall-clock billing punishes idle-heavy agent loops.</div>
+    </div>
+
+    <div class="vcard">
+      <h3>Modal</h3><div class="prim">GVISOR · THE GPU CATALOGUE</div>
+      <dl>
+        <dt>Elasticity</dt><dd>Sub-second claimed cold starts; aggressive idle reclaim; scales to zero.</dd>
+        <dt>Pricing</dt><dd>$0.1419/core-hr sandbox (~3× base compute) + $0.024/GiB-hr, per-second. Egress $0.04/GB since Oct 1, 2026.</dd>
+        <dt>Workload fit</dt><dd>5 min default → 24h max. Full self-serve GPU: T4 → B200 ($3.95–$6.25/hr H100/B200).</dd>
+        <dt>Isolation</dt><dd>gVisor user-space kernel (VM in beta) — middle ground for agent-generated code you partially trust.</dd>
+        <dt>Governance</dt><dd>Timeout reclaim; SOC 2 + HIPAA published.</dd>
+      </dl>
+      <div class="verdict"><strong>Verdict:</strong> the GPU shortlist is Modal or Daytona — Modal wins catalogue depth, loses on unit price.</div>
+    </div>
+
+    <div class="vcard">
+      <h3>Cloudflare Workers</h3><div class="prim">V8 ISOLATES · THE SPEED EXTREME</div>
+      <dl>
+        <dt>Elasticity</dt><dd>&lt;5ms cold start; effectively unlimited concurrency; scales to zero.</dd>
+        <dt>Pricing</dt><dd>$5/mo + $0.30/M req; <b>CPU-time billing</b> — idle I/O wait is free. 128MB fixed memory, money can't fix it.</dd>
+        <dt>Workload fit</dt><dd>30s default / 5 min max CPU; Cron/Queue 15 min. No in-sandbox GPU.</dd>
+        <dt>Isolation</dt><dd>V8 isolates — fastest boot, shared process; wrong primitive for untrusted native code.</dd>
+        <dt>Governance</dt><dd>CPU-time cap as TTL; Cloudflare Sandbox (containers via Durable Objects) for heavier work at $0.072/active vCPU-hr.</dd>
+      </dl>
+      <div class="verdict"><strong>Verdict:</strong> unbeatable for I/O-bound edge logic; not a sandbox for running untrusted binaries.</div>
+    </div>
+
+    <div class="vcard">
+      <h3>Daytona</h3><div class="prim">CONTAINER (VM OPTIONAL) · THE UNICORN</div>
+      <dl>
+        <dt>Elasticity</dt><dd>Sub-90ms claimed creation; persistent sessions; 15-min idle auto-stop default.</dd>
+        <dt>Pricing</dt><dd>$0.0504/vCPU-hr + $0.0162/GiB-hr — identical to E2B, no subscription floor. H100 ~$2.27/hr live (ignore the stale $3.95).</dd>
+        <dt>Workload fit</dt><dd>Stateful sessions, pause/resume, GPU passthrough (up to 8 GPUs).</dd>
+        <dt>Isolation</dt><dd>Docker/Kata/Sysbox containers — weakest boundary of the set; VM sandboxes optional.</dd>
+        <dt>Governance</dt><dd>SOC 2/HIPAA/GDPR. Core went closed-source June 2026 — the auditability story changed.</dd>
+      </dl>
+      <div class="verdict"><strong>Verdict:</strong> $1B valuation (Oct 20, 2026) on "a computer for every agent." Fastest creation, thinnest isolation — pick your tradeoff with eyes open.</div>
+    </div>
+
+    <div class="vcard">
+      <h3>Vercel Sandbox</h3><div class="prim">FIRECRACKER MICROVM · THE IDLE-HEAVY WINNER</div>
+      <dl>
+        <dt>Elasticity</dt><dd>0.67s median in a 100-burst test (all succeeded); 10 Hobby / 10,000 Pro concurrent.</dd>
+        <dt>Pricing</dt><dd>$0.128/active vCPU-hr + $0.0212/GB-hr, <b>per-ms, active CPU only</b> — I/O wait is free.</dd>
+        <dt>Workload fit</dt><dd>45 min Hobby / 5h Pro. No GPU. Snapshots $0.08/GB-mo.</dd>
+        <dt>Isolation</dt><dd>Firecracker microVM, isolated network by default.</dd>
+        <dt>Governance</dt><dd>OIDC wired into the Vercel project; session timeout as TTL.</dd>
+      </dl>
+      <div class="verdict"><strong>Verdict:</strong> for idle-heavy agent loops (71–98% of runtime waiting, per Vercel's own data), active-CPU billing beats wall-clock rivals 2.6–19×.</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="pricing">
+  <h2><span class="n">04</span>Pricing Snapshot</h2>
+  <p class="sub">Verified October 22, 2026. Pricing moves — this is a snapshot, not a quote. The structural finding matters more than any number:</p>
+  <div class="insight">
+    <h4>The wall-clock vs. active-CPU divide</h4>
+    <p>E2B, Modal, and Daytona bill <strong>wall-clock</strong>: the meter runs while your agent waits on a model response — which, for chat-style coding agents, is most of the runtime. Vercel Sandbox, Cloudflare, and AWS's agent primitives bill <strong>active CPU</strong>: idle I/O wait is free.</p>
+    <p>For idle-heavy workloads, the billing model matters more than the vendor. Same tasks, same isolation outcome — up to an order of magnitude apart on the invoice. Match the meter to the workload shape before comparing headline rates.</p>
+  </div>
+  <div class="tablewrap" style="margin-top:26px">
+  <table>
+    <thead><tr><th>Resource</th><th>E2B</th><th>Daytona</th><th>Modal (sandbox)</th><th>Vercel Sandbox</th><th>Cloudflare</th></tr></thead>
+    <tbody>
+      <tr><td class="v">vCPU / hr</td><td>$0.0504</td><td>$0.0504</td><td>$0.1419 / core</td><td>$0.128 (active only)</td><td>$0.072 (active only)</td></tr>
+      <tr><td class="v">Memory / GiB-hr</td><td>$0.0162</td><td>$0.0162</td><td>$0.0240</td><td>$0.0212</td><td>$0.009</td></tr>
+      <tr><td class="v">H100 / hr</td><td>Enterprise only</td><td>~$2.27 (live)</td><td>$3.95</td><td>—</td><td>—</td></tr>
+      <tr><td class="v">Billing unit</td><td>per-second</td><td>per-second</td><td>per-second</td><td>per-millisecond</td><td>CPU-ms</td></tr>
+      <tr><td class="v">Idle billed?</td><td>Yes (wall-clock)</td><td>Yes (wall-clock)</td><td>Yes (wall-clock)</td><td>No (active CPU)</td><td>No (active CPU)</td></tr>
+      <tr><td class="v">Egress</td><td>Tiered incl.</td><td>—</td><td>$0.04/GB</td><td>$0.15/GB ent.</td><td>—</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="feeds">
+  <h2><span class="n">05</span>Living Feeds</h2>
+  <p class="sub">A knowledge base dies when its numbers go stale. These are the programmatic feeds this scorecard is refreshed from — the registry the site runs on:</p>
+  <div class="feeds">
+    <div class="feed">
+      <h3>AWS Price List API</h3>
+      <p>Query the live AWS price list for Lambda GB-second rates, request pricing, and EC2 spot fluctuations per region and instance family.</p>
+      <span class="src">pricing.us-east-1.amazonaws.com · JSON offer files</span>
+    </div>
+    <div class="feed">
+      <h3>Google Cloud Billing Catalog API</h3>
+      <p>Pull current Compute Engine on-demand and Spot VM rates, GPU pricing per machine family, and regional variance — daily.</p>
+      <span class="src">cloudbilling.googleapis.com/v1/services</span>
+    </div>
+    <div class="feed">
+      <h3>Vantage Cloud Cost Leaderboard</h3>
+      <p>Aggregator tracking spot vs. on-demand fluctuations across clouds; catches the pricing moves the vendor pages bury.</p>
+      <span class="src">vantage.sh</span>
+    </div>
+    <div class="feed">
+      <h3>CloudPrice.net</h3>
+      <p>Independent rate tracking for cross-vendor comparison; second source on any number that decides a budget.</p>
+      <span class="src">cloudprice.net</span>
+    </div>
+    <div class="feed">
+      <h3>CNCF Landscape — Serverless</h3>
+      <p>Watch the Serverless quadrant for emerging commercial sandboxes and FaaS platforms before they hit the buyer's guides.</p>
+      <span class="src">landscape.cncf.io</span>
+    </div>
+    <div class="feed">
+      <h3>CNCF Landscape — Container Runtime</h3>
+      <p>Watch the Container Runtime quadrant for new microVM orchestrators (Firecracker, Kata, gVisor derivatives) — the isolation layer underneath the pricing.</p>
+      <span class="src">landscape.cncf.io</span>
+    </div>
+  </div>
+  <div class="insight">
+    <h4>Refresh discipline</h4>
+    <p>Pricing cells re-verified against vendor pages and the feeds above; vendor claims re-checked against independent measurements where they exist (burst tests, cold-start benchmarks). Anything marked <span class="mono" style="font-size:12px">(claimed)</span> is the vendor's number until someone measures it. Anything marked <span class="mono" style="font-size:12px">(measured)</span> survived contact with reality.</p>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<footer>
+  <div class="cols">
+    <div>
+      <div class="brand" style="margin-bottom:10px">DISPOSABLE<span>COMPUTE</span>.COM</div>
+      <div>The execution substrate of the agent economy — tracked, scored, and kept current.</div>
+    </div>
+    <div class="stamp">
+      SCORECARD V1 · BUILT 2026-10-22<br>
+      FIGURES VERIFIED 2026-10-22 · VERIFY BEFORE YOU BUDGET<br>
+      PRICES MOVE · ARCHITECTURES DON'T (AS FAST)
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
