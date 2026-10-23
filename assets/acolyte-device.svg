@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 760" role="img" aria-label="Acolyte device concept illustration">
+  <defs>
+    <linearGradient id="ringMetal" x1="0" x2="1">
+      <stop offset="0%" stop-color="#efefef"/>
+      <stop offset="18%" stop-color="#b8bbbd"/>
+      <stop offset="34%" stop-color="#f5f5f5"/>
+      <stop offset="52%" stop-color="#b7babd"/>
+      <stop offset="70%" stop-color="#f6f6f6"/>
+      <stop offset="100%" stop-color="#8f9395"/>
+    </linearGradient>
+    <radialGradient id="innerGlow" cx="50%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#f9f1d0"/>
+      <stop offset="26%" stop-color="#f2e4c0"/>
+      <stop offset="70%" stop-color="#d8c59e"/>
+      <stop offset="100%" stop-color="#9e7a47"/>
+    </radialGradient>
+    <radialGradient id="hoodShade" cx="50%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#0f1415"/>
+      <stop offset="48%" stop-color="#090d0f"/>
+      <stop offset="100%" stop-color="#040709"/>
+    </radialGradient>
+    <linearGradient id="screenGlow" x1="0" x2="1">
+      <stop offset="0%" stop-color="#f8f2d6"/>
+      <stop offset="50%" stop-color="#f3e8cb"/>
+      <stop offset="100%" stop-color="#d7bd87"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="18" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <ellipse cx="400" cy="380" rx="292" ry="298" fill="url(#ringMetal)"/>
+    <ellipse cx="400" cy="380" rx="270" ry="274" fill="#0a0d10" opacity="0.72"/>
+    <ellipse cx="400" cy="380" rx="246" ry="250" fill="#0b1113" stroke="#0d1719" stroke-width="12"/>
+
+    <path d="M316 202c43-18 86-27 129-26 54 1 95 20 117 48-14-7-30-12-49-14-63-11-100-2-153 31-19 12-34 25-48 42-25-29-18-52 4-81z" fill="#efefe5" opacity="0.18"/>
+
+    <path d="M159 380c0-120 97-206 241-206s241 86 241 206-97 206-241 206S159 500 159 380z" fill="#000000" opacity="0.28"/>
+
+    <path d="M284 393c0-102 62-169 116-169 64 0 116 66 116 169v72h-232v-72z" fill="url(#hoodShade)"/>
+    <path d="M286 414c0 64 31 109 114 109 83 0 114-45 114-109v-26h-228v26z" fill="url(#hoodShade)"/>
+    <path d="M294 377c0-66 50-114 106-114s106 48 106 114v85H294v-85z" fill="#0b0d0d" opacity="0.94"/>
+
+    <g>
+      <path d="M285 388c0-62 48-122 115-122 67 0 115 60 115 122v117H285V388z" fill="url(#screenGlow)" opacity="0.92"/>
+      <path d="M311 392c0-44 30-86 89-86 59 0 89 42 89 86v82h-178v-82z" fill="#e9d7a8" opacity="0.95"/>
+      <path d="M346 292c38 11 76 11 108 0 13 16 20 31 20 48 0 56-28 92-64 92-36 0-64-36-64-92 0-17 7-32 20-48z" fill="#f0e0b5" opacity="0.18"/>
+      <path d="M359 374c28 7 54 7 82 0" stroke="#d6c29d" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+      <path d="M360 435c14 18 32 27 40 27s26-9 40-27" stroke="#b18a59" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+      <path d="M312 389h176" stroke="#d4bc7b" stroke-width="5" stroke-linecap="round" opacity="0.36"/>
+    </g>
+
+    <path d="M330 302c22-21 48-31 70-31 17 0 41 5 62 18 28 17 53 52 58 83-35-28-89-42-142-14-10 5-19 13-27 20-12-23-8-46-21-76z" fill="#111516" opacity="0.78"/>
+    <path d="M285 383c0-32 18-61 43-76-11 25-14 58-14 76v131h-29V383z" fill="#090b0d" opacity="0.9"/>
+    <path d="M515 383c0-32-18-61-43-76 11 25 14 58 14 76v131h29V383z" fill="#090b0d" opacity="0.9"/>
+
+    <g opacity="0.72">
+      <circle cx="400" cy="202" r="7" fill="#d5d3d0"/>
+      <circle cx="400" cy="204" r="3" fill="#a0a0a0"/>
+    </g>
+
+    <g opacity="0.8">
+      <circle cx="240" cy="368" r="6" fill="#aeada9"/>
+      <circle cx="560" cy="368" r="6" fill="#aeada9"/>
+    </g>
+  </g>
+</svg>
